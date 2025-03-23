@@ -41,8 +41,13 @@ public class StudentImplement implements StudentService {
     public Students getStudentById(int id){
         return studentRepository.getStudentById(id);
     }
+
     @Override
     public Students deleteStudentById(int id){
         return studentRepository.deleteStudentById(id);
+    }
+    @Override
+    public Students updateStudentById(int id, StudentRequest studentRequest){
+        return studentRepository.updateStudent(id, studentRequest);
     }
 }

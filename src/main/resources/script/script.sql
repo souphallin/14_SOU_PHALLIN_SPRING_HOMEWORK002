@@ -66,6 +66,21 @@ where student_id = 1;
 
 delete from students where student_id = 28 returning *;
 
+insert into students
+values (default, 'df', 'hghgh', '444')
+RETURNING *;
+
+insert into student_course(student_id, course_id)
+VALUES(33, 1) ;
+
+
+insert into student_course(student_id, course_id)
+VALUES(33, 2) ;
+
+SELECT * FROM students WHERE student_id = 34;
+
+update students set student_name = 'BebBeb', email = 'beb@gmail.com', phone_number = '0987345676' where student_id = 34;
+
 -- create table student_course(
 --     id serial primary key ,
 --     student_id integer ,

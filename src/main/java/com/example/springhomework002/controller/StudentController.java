@@ -63,4 +63,14 @@ public class StudentController {
                 .build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<Students>> updateStudentById(@PathVariable int id, @RequestBody StudentRequest studentRequest){
+        ApiResponse<Students> response = ApiResponse.<Students>builder()
+                .message("Update Student Successful!!!")
+                .payload(studentService.updateStudentById(id, studentRequest))
+                .status(HttpStatus.OK)
+                .timestamp(LocalDateTime.now())
+                .build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

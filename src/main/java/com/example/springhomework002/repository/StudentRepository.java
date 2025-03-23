@@ -20,7 +20,7 @@ public interface StudentRepository {
             @Result(property = "courses", column = "student_id",
                     many = @Many(select = "com.example.springhomework002.repository.CourseRepository.getCourseByStudentId"))
     })
-    public List<Students> getAllStudents();
+    List<Students> getAllStudents();
 
     @Select("""
         insert into students 
@@ -28,7 +28,7 @@ public interface StudentRepository {
         RETURNING *
     """)
     @ResultMap("getMapper")
-     Students addNewStudent(@Param("request") StudentRequest studentRequest);
+    Students addNewStudent(@Param("request") StudentRequest studentRequest);
 
     @Insert("""
         insert into student_course values (default, #{studentId}, #{courseId})
@@ -39,11 +39,19 @@ public interface StudentRepository {
         SELECT * FROM students WHERE student_id = #{id}
     """)
     @ResultMap("getMapper")
-    public Students getStudentById(@Param("id") Integer id);
+    Students getStudentById(@Param("id") Integer id);
 
     @Select("""
         delete from students where student_id = #{id} returning *
     """)
     @ResultMap("getMapper")
-    public Students deleteStudentById(@Param("id") Integer id);
+    Students deleteStudentById(@Param("id") Integer id);
+
+    @Select("""
+        update students 
+        set student_name = #{request.studentName}, email = #{request.studentEmail}, phone_number = #{request.studentPhone} 
+        where student_id = #{id} returning *
+    """)
+    @ResultMap("getMapper")
+    Students updateStudent(int id, @Param("request") StudentRequest student);
 }
